@@ -1,0 +1,51 @@
+<div class="register-container">
+  <h2>Registrar Nova Conta</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" formControlName="nome">
+      <div *ngIf="registerForm.get('nome')?.invalid && (registerForm.get('nome')?.dirty || registerForm.get('nome')?.touched)" class="error-message">
+        <div *ngIf="registerForm.get('nome')?.errors?.['required']">Nome é obrigatório.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email">
+      <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="error-message">
+        <div *ngIf="registerForm.get('email')?.errors?.['required']">Email é obrigatório.</div>
+        <div *ngIf="registerForm.get('email')?.errors?.['email']">Email inválido.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" formControlName="senha">
+      <div *ngIf="registerForm.get('senha')?.invalid && (registerForm.get('senha')?.dirty || registerForm.get('senha')?.touched)" class="error-message">
+        <div *ngIf="registerForm.get('senha')?.errors?.['required']">Senha é obrigatória.</div>
+        <div *ngIf="registerForm.get('senha')?.errors?.['minlength']">Senha deve ter no mínimo 6 caracteres.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="perfil">Perfil:</label>
+      <select id="perfil" formControlName="perfil">
+        <option value="leitor">Leitor</option>
+        <option value="bibliotecario">Bibliotecário</option>
+      </select>
+      <div *ngIf="registerForm.get('perfil')?.invalid && (registerForm.get('perfil')?.dirty || registerForm.get('perfil')?.touched)" class="error-message">
+        <div *ngIf="registerForm.get('perfil')?.errors?.['required']">Perfil é obrigatório.</div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!registerForm.valid">Registrar</button>
+
+    <div *ngIf="errorMessage" class="alert-error">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="alert-success">
+      {{ successMessage }}
+    </div>
+  </form>
+  <p>Já tem uma conta? <a routerLink="/login">Faça login aqui</a>.</p>
+</div>

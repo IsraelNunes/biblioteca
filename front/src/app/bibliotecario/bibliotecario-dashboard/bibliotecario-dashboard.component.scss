@@ -1,0 +1,261 @@
+
+.bibliotecario-dashboard-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
+  text-align: center;
+
+  h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: #555;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+  }
+
+  .section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    h3 {
+      color: #34495e;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+
+      &:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.85em;
+      margin-top: 5px;
+    }
+  }
+
+  button[type="submit"] {
+    background-color: #28a745; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+
+    &:disabled {
+      background-color: #90d19f;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: #218838;
+    }
+  }
+
+  .cancel-btn { 
+    background-color: #6c757d; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 10px; 
+
+    &:hover {
+      background-color: #5a6268;
+    }
+  }
+
+  .book-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      color: #333;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f6f6f6;
+    }
+
+    .edit-btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 5px;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #c82333;
+      }
+    }
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    background-color: #eee;
+    margin: 40px 0;
+  }
+
+  button { 
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px; 
+
+    &:hover {
+      background-color: #c82333;
+    }
+  }
+
+  .alert-error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    text-align: left;
+  }
+
+  .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    text-align: left;
+  }
+}
+
+
+.loan-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f6f6f6;
+  }
+
+  .status-btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-right: 5px;
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .status-btn.success {
+    background-color: #28a745; 
+    color: white;
+  }
+  .status-btn.warning {
+    background-color: #ffc107; 
+    color: #333;
+  }
+
+  .status-ativo {
+    color: #28a745;
+    font-weight: bold;
+  }
+  .status-devolvido {
+    color: #6c757d;
+    font-weight: bold;
+  }
+  .status-atrasado {
+    color: #dc3545;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,83 @@
+<div class="leitor-dashboard-container">
+  <h2>Painel do Leitor</h2>
+  <p>Bem-vindo, Leitor! Explore nosso catálogo de livros e gerencie seus empréstimos.</p>
+
+  <div class="section">
+    <h3>Livros Disponíveis para Empréstimo</h3>
+    <table class="book-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Ano</th>
+          <th>Quantidade Disponível</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of availableBooks">
+          <td>{{ book.id }}</td>
+          <td>{{ book.titulo }}</td>
+          <td>{{ book.autor }}</td>
+          <td>{{ book.ano_publicacao }}</td>
+          <td>{{ book.quantidade_disponivel }}</td>
+          <td>
+            <button class="request-loan-btn" (click)="requestBookLoan(book)" [disabled]="book.quantidade_disponivel <= 0">Solicitar Empréstimo</button>
+          </td>
+        </tr>
+        <tr *ngIf="availableBooks.length === 0">
+          <td colspan="6">Nenhum livro disponível no momento.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <h3>Meus Empréstimos</h3>
+    <table class="loan-table">
+      <thead>
+        <tr>
+          <th>Livro</th>
+          <th>Data Empréstimo</th>
+          <th>Data Prevista Devolução</th>
+          <th>Data Devolução Real</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let loan of myLoans">
+          <td>{{ loan.titulo_livro }}</td>
+          <td>{{ loan.data_emprestimo }}</td>
+          <td>{{ loan.data_devolucao_prevista }}</td>
+          <td>{{ loan.data_devolucao_real || 'Pendente' }}</td>
+          <td>
+            <span [ngClass]="{'status-ativo': loan.status === 'ativo', 'status-devolvido': loan.status === 'devolvido', 'status-atrasado': loan.status === 'atrasado'}">
+              {{ loan.status | uppercase }}
+            </span>
+          </td>
+          <td>
+            <button class="return-btn" (click)="requestReturnBook(loan)" [disabled]="loan.status !== 'ativo'">Solicitar Devolução</button>
+          </td>
+        </tr>
+        <tr *ngIf="myLoans.length === 0">
+          <td colspan="6">Você não possui empréstimos ativos.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert-error">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="successMessage" class="alert-success">
+    {{ successMessage }}
+  </div>
+
+  <hr>
+
+  <button (click)="logout()">Sair</button>
+</div>

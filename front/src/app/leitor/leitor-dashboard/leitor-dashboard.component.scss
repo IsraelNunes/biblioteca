@@ -1,0 +1,122 @@
+.leitor-dashboard-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
+  text-align: center;
+}
+.leitor-dashboard-container h2 {
+  color: #2980b9;
+  margin-bottom: 15px;
+}
+.leitor-dashboard-container p {
+  color: #555;
+  font-size: 1.1em;
+  margin-bottom: 30px;
+}
+.leitor-dashboard-container .section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.leitor-dashboard-container .section h3 {
+  color: #34495e;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+.leitor-dashboard-container .book-table, .leitor-dashboard-container .loan-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.leitor-dashboard-container .book-table th, .leitor-dashboard-container .book-table td, .leitor-dashboard-container .loan-table th, .leitor-dashboard-container .loan-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+.leitor-dashboard-container .book-table th, .leitor-dashboard-container .loan-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #333;
+}
+.leitor-dashboard-container .book-table tbody tr:nth-child(even), .leitor-dashboard-container .loan-table tbody tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+.leitor-dashboard-container .request-loan-btn, .leitor-dashboard-container .return-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+.leitor-dashboard-container .request-loan-btn:hover:not(:disabled), .leitor-dashboard-container .return-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+.leitor-dashboard-container .request-loan-btn:disabled, .leitor-dashboard-container .return-btn:disabled {
+  background-color: #a0c9f1;
+  cursor: not-allowed;
+}
+.leitor-dashboard-container .return-btn {
+  background-color: #ffc107;
+  color: #333;
+}
+.leitor-dashboard-container .return-btn:hover:not(:disabled) {
+  background-color: #e0a800;
+}
+.leitor-dashboard-container .status-ativo {
+  color: #28a745;
+  font-weight: bold;
+}
+.leitor-dashboard-container .status-devolvido {
+  color: #6c757d;
+  font-weight: bold;
+}
+.leitor-dashboard-container .status-atrasado {
+  color: #dc3545;
+  font-weight: bold;
+}
+.leitor-dashboard-container hr {
+  border: 0;
+  height: 1px;
+  background-color: #eee;
+  margin: 40px 0;
+}
+.leitor-dashboard-container button {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+.leitor-dashboard-container button:hover {
+  background-color: #c82333;
+}
+.leitor-dashboard-container .alert-error {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+  text-align: left;
+}
+.leitor-dashboard-container .alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+  text-align: left;
+}

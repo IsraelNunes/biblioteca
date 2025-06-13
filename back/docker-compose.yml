@@ -1,0 +1,37 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_db_biblioteca
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: biblioteca_db
+      MYSQL_USER: user_biblioteca
+      MYSQL_PASSWORD: user_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db_init:/docker-entrypoint-initdb.d
+
+  backend:
+    build: .
+    container_name: node_backend_biblioteca
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: user_biblioteca
+      DB_PASSWORD: user_password
+      DB_NAME: biblioteca_db
+      DB_PORT: 3306
+      JWT_SECRET: supersecretjwtkey
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+volumes:
+  db_data: {}

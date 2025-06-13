@@ -1,0 +1,134 @@
+<div class="bibliotecario-dashboard-container">
+  <h2>Painel do Bibliotecário</h2>
+  <p>Bem-vindo, Bibliotecário! Aqui você pode gerenciar livros e empréstimos.</p>
+
+  <div class="section">
+    <h3>{{ isEditing ? 'Editar Livro' : 'Adicionar Novo Livro' }}</h3>
+    <form [formGroup]="bookForm" (ngSubmit)="submitBookForm()">
+      <input type="hidden" formControlName="id">
+
+      <div class="form-group">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" formControlName="titulo">
+        <div *ngIf="bookForm.get('titulo')?.invalid && (bookForm.get('titulo')?.dirty || bookForm.get('titulo')?.touched)" class="error-message">
+          <div *ngIf="bookForm.get('titulo')?.errors?.['required']">Título é obrigatório.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" formControlName="autor">
+        <div *ngIf="bookForm.get('autor')?.invalid && (bookForm.get('autor')?.dirty || bookForm.get('autor')?.touched)" class="error-message">
+          <div *ngIf="bookForm.get('autor')?.errors?.['required']">Autor é obrigatório.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="ano_publicacao">Ano de Publicação:</label>
+        <input type="number" id="ano_publicacao" formControlName="ano_publicacao">
+        <div *ngIf="bookForm.get('ano_publicacao')?.invalid && (bookForm.get('ano_publicacao')?.dirty || bookForm.get('ano_publicacao')?.touched)" class="error-message">
+          <div *ngIf="bookForm.get('ano_publicacao')?.errors?.['min'] || bookForm.get('ano_publicacao')?.errors?.['max']">Ano inválido.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="quantidade_disponivel">Quantidade Disponível:</label>
+        <input type="number" id="quantidade_disponivel" formControlName="quantidade_disponivel">
+        <div *ngIf="bookForm.get('quantidade_disponivel')?.invalid && (bookForm.get('quantidade_disponivel')?.dirty || bookForm.get('quantidade_disponivel')?.touched)" class="error-message">
+          <div *ngIf="bookForm.get('quantidade_disponivel')?.errors?.['required']">Quantidade é obrigatória.</div>
+          <div *ngIf="bookForm.get('quantidade_disponivel')?.errors?.['min']">Quantidade deve ser no mínimo 0.</div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!bookForm.valid">{{ isEditing ? 'Atualizar Livro' : 'Adicionar Livro' }}</button>
+      <button type="button" *ngIf="isEditing" (click)="resetBookForm()" class="cancel-btn">Cancelar Edição</button>
+
+      <div *ngIf="errorMessage" class="alert-error">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="successMessage" class="alert-success">
+        {{ successMessage }}
+      </div>
+    </form>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <h3>Livros no Catálogo</h3>
+    <table class="book-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Ano</th>
+          <th>Quantidade Disponível</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books">
+          <td>{{ book.id }}</td>
+          <td>{{ book.titulo }}</td>
+          <td>{{ book.autor }}</td>
+          <td>{{ book.ano_publicacao }}</td>
+          <td>{{ book.quantidade_disponivel }}</td>
+          <td>
+            <button class="edit-btn" (click)="editBook(book)">Editar</button>
+            <button class="delete-btn" (click)="deleteBook(book.id)">Excluir</button>
+          </td>
+        </tr>
+        <tr *ngIf="books.length === 0">
+          <td colspan="6">Nenhum livro encontrado.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <h3>Gerenciamento de Empréstimos</h3>
+    <table class="loan-table">
+      <thead>
+        <tr>
+          <th>ID Empréstimo</th>
+          <th>Livro</th>
+          <th>Leitor</th>
+          <th>Data Empréstimo</th>
+          <th>Data Prevista Devolução</th>
+          <th>Data Devolução Real</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let loan of allLoans">
+          <td>{{ loan.id }}</td>
+          <td>{{ loan.titulo_livro }}</td>
+          <td>{{ loan.nome_leitor }}</td>
+          <td>{{ loan.data_emprestimo }}</td>
+          <td>{{ loan.data_devolucao_prevista }}</td>
+          <td>{{ loan.data_devolucao_real || 'Pendente' }}</td>
+          <td>
+            <span [ngClass]="{'status-ativo': loan.status === 'ativo', 'status-devolvido': loan.status === 'devolvido', 'status-atrasado': loan.status === 'atrasado'}">
+              {{ loan.status | uppercase }}
+            </span>
+          </td>
+          <td>
+            <button class="status-btn success" (click)="updateLoanStatus(loan, 'devolvido')" [disabled]="loan.status === 'devolvido'">Marcar como Devolvido</button>
+            <button class="status-btn warning" (click)="updateLoanStatus(loan, 'atrasado')" [disabled]="loan.status !== 'ativo'">Marcar como Atrasado</button>
+          </td>
+        </tr>
+        <tr *ngIf="allLoans.length === 0">
+          <td colspan="8">Nenhum empréstimo registrado.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <button (click)="logout()">Sair</button>
+</div>
